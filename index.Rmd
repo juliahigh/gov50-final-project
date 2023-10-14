@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Julia High"
-description: "My final project -- potentially on municipal voting trends!"
+description: "My final project -- potentially on climate policies around the world!"
 output:
   distill::distill_article:
     self_contained: false
@@ -10,8 +10,14 @@ output:
 
 
 ## Project thoughts
+Research question: Does a country's GDP determine the type of energy around which which they focus their climate policy?
 
-I honestly don't know exactly what I want to do my final project on, but I might want to do something relating to voting participation trends in municipal elections. In another class I'm taking called Gov 1433, my professor works at the Public Interest Tech Lab and she mentioned that they have the largest collection of voting and elections data in the country. She suggested that I might do a project with the data for my home state, Florida, or for my county. I might do that, but I'm going to keep trying to think of something more interesting and unique!
+Hypothesis: I predict that as a country's GDP** increases, they will focus their policies around more clean energy. This is because wealthier, more developed countries may be economically stable enough that their government is willing to take a risk and encourage the use of clean energy sources. However, less developed countries may have non-adaptable workforces and less resources to innovate in the field of clean energy. 
+
+**While this dataset includes only G20 countries which will tend to have larger economies, I will still need to add a category to this dataset that includes specific GDP numbers in order to evaluate my research question. 
+
+The explanatory variable of interest in my project will be countries' GDP. I intend to add a column to my dataset with information on the GDP of each of the G20 countries to perform my analysis. I will then create a range of values for each GDP level and categorize countries by their GDP range of "High GDP", "Medium GDP," or "Low GDP." These values will all be relative given that this dataset includes G20 countries. My outcome variable of interest is the type of energy source that a given governmental policy focuses on. In this dataset, the energy types include oil and gas, gas and gas products, nuclear, multiple fossil, wind, multiple renewable, solar, coal, hydrogen, biofuels and waste, and hydro. There are some miscellaneous types that do not focus on a specific type of energy, so I will remove those from my analysis. An observed pattern in the data that would provide support for my hypothesis is if countries with a GDP within a higher range develop policies that cluster around a certain energy type, and vice versa for countries within a lower GDP range. 
+
 
 
 
