@@ -23,5 +23,42 @@ The explanatory variable of interest in my project will be countries' GDP. I int
 
 ```{r}
 library(tidyverse)
-read_csv("region-g20+countries.csv")
+countries_data <- read_csv("region-g20+countries.csv")
+countries_data
 ```
+
+```{r}
+countries_data <- countries_data |>
+  select("Country", "Policy Category", "Energy Type", "Value committed, USD")
+countries_data
+```
+
+```{r}
+countries_data <- countries_data |>
+  rename(
+    country = "Country",
+    policy_category = "Policy Category",
+    energy_type = "Energy Type",
+    value_committed_usd = "Value committed, USD"
+  )
+```
+
+```{r}
+countries_data |>
+  group_by(country) |>
+  
+  ggplot(mapping = aes(x = energy_type, y = value_committed_usd)) +
+      geom_col(mapping = aes(fill = country)) +
+  scale_x_discrete(guide = guide_axis(angle = 90))
+```
+
+,
+               position = "dodge"
+
+
+
+
+
+
+
+
