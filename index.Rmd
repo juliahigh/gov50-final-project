@@ -52,10 +52,6 @@ countries_data |>
   scale_x_discrete(guide = guide_axis(angle = 90))
 ```
 
-,
-               position = "dodge"
-
-
 
 
 
