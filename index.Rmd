@@ -18,39 +18,109 @@ Hypothesis: I predict that as a country's GDP** increases, they will focus their
 
 The explanatory variable of interest in my project will be countries' GDP. I intend to add a column to my dataset with information on the GDP of each of the G20 countries to perform my analysis. I will then create a range of values for each GDP level and categorize countries by their GDP range of "High GDP", "Medium GDP," or "Low GDP." These values will all be relative given that this dataset includes G20 countries. My outcome variable of interest is the type of energy source that a given governmental policy focuses on. In this dataset, the energy types include oil and gas, gas and gas products, nuclear, multiple fossil, wind, multiple renewable, solar, coal, hydrogen, biofuels and waste, and hydro. There are some miscellaneous types that do not focus on a specific type of energy, so I will remove those from my analysis. An observed pattern in the data that would provide support for my hypothesis is if countries with a GDP within a higher range develop policies that cluster around a certain energy type, and vice versa for countries within a lower GDP range. 
 
-
+## MESSED A FEW THINGS UP SO SAVE BUT DON'T KNIT OR PUSH BEFORE FIXING
 
 
 ```{r}
 library(tidyverse)
-countries_data <- read_csv("region-g20+countries.csv")
-countries_data
 ```
 
 ```{r}
-countries_data <- countries_data |>
-  select("Country", "Policy Category", "Energy Type", "Value committed, USD")
-countries_data
-```
-
-```{r}
-countries_data <- countries_data |>
+countries_data <- read_csv("region-g20+countries.csv") |>
+  select("Country", "Policy Category", "Energy Type", "Value committed, USD") |>
   rename(
     country = "Country",
     policy_category = "Policy Category",
     energy_type = "Energy Type",
     value_committed_usd = "Value committed, USD"
   )
+countries_data
 ```
 
 ```{r}
 countries_data |>
   group_by(country) |>
-  
+  summarize(
+    energy_type = energy_type,
+    mean_value = mean(value_committed_usd)) |>
+  ggplot(mapping = aes(x = energy_type,
+                       y = mean_value)) +
+  geom_col(mapping = aes(fill = country)) +
+  scale_x_discrete(guide = guide_axis(angle = 90))
+```
+##Practice
+
+I'm on track to something, I might need to 
+
+
+```{r}
+countries_data |>
+  group_by(country, energy_type) |>
+  summarize(
+    energy_type = energy_type,
+    mean_value = mean(value_committed_usd))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+countries_data |>
+  group_by(country) |>
   ggplot(mapping = aes(x = energy_type, y = value_committed_usd)) +
       geom_col(mapping = aes(fill = country)) +
   scale_x_discrete(guide = guide_axis(angle = 90))
 ```
+
+```{r}
+fossil_countries <- countries_data |>
+  filter(
+    policy_category == "fossil unconditional",
+    value_committed_usd > 0
+  ) |>
+  group_by(
+    country
+  ) |>
+  summarize(
+    total_fossil = sum(value_committed_usd)
+  ) |>
+  arrange(desc(total_fossil))
+knitr::kable(fossil_countries,
+             col.names = c("Country", "Total Value Committed to Fossil Fuel Policies"))
+```
+
+```{r}
+clean_countries <- countries_data |>
+  filter(
+    policy_category == "clean unconditional",
+    value_committed_usd > 0
+  ) |>
+  group_by(
+    country
+  ) |>
+  summarize(
+    total_clean = sum(value_committed_usd)
+  ) |>
+  arrange(desc(total_clean))
+knitr::kable(clean_countries,
+             col.names = c("Country", "Total Value Committed to Clean Fuel Policies"))
+```
+
+
+
+
+
+
+
 
 
 
