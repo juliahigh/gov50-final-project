@@ -46,38 +46,7 @@ countries_data |>
   geom_col(mapping = aes(fill = country)) +
   scale_x_discrete(guide = guide_axis(angle = 90))
 ```
-##Practice
 
-I'm on track to something, I might need to 
-
-
-```{r}
-countries_data |>
-  group_by(country, energy_type) |>
-  summarize(
-    energy_type = energy_type,
-    mean_value = mean(value_committed_usd))
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-countries_data |>
-  group_by(country) |>
-  ggplot(mapping = aes(x = energy_type, y = value_committed_usd)) +
-      geom_col(mapping = aes(fill = country)) +
-  scale_x_discrete(guide = guide_axis(angle = 90))
-```
 
 ```{r}
 fossil_countries <- countries_data |>
@@ -112,16 +81,6 @@ clean_countries <- countries_data |>
 knitr::kable(clean_countries,
              col.names = c("Country", "Total Value Committed to Clean Fuel Policies"))
 ```
-
-
-
-
-
-
-
-
-
-
 
 
 
