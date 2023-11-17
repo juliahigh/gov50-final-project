@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","region-g20+countries.csv"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","region-g20+countries.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1548,75 +1548,280 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Hypothesis: I predict that as a country’s GDP** increases, they will focus their policies around more clean energy. This is because wealthier, more developed countries may be economically stable enough that their government is willing to take a risk and encourage the use of clean energy sources. However, less developed countries may have non-adaptable workforces and less resources to innovate in the field of clean energy.</p>
 <p>**While this dataset includes only G20 countries which will tend to have larger economies, I will still need to add a category to this dataset that includes specific GDP numbers in order to evaluate my research question.</p>
 <p>The explanatory variable of interest in my project will be countries’ GDP. I intend to add a column to my dataset with information on the GDP of each of the G20 countries to perform my analysis. I will then create a range of values for each GDP level and categorize countries by their GDP range of “High GDP”, “Medium GDP,” or “Low GDP.” These values will all be relative given that this dataset includes G20 countries. My outcome variable of interest is the type of energy source that a given governmental policy focuses on. In this dataset, the energy types include oil and gas, gas and gas products, nuclear, multiple fossil, wind, multiple renewable, solar, coal, hydrogen, biofuels and waste, and hydro. There are some miscellaneous types that do not focus on a specific type of energy, so I will remove those from my analysis. An observed pattern in the data that would provide support for my hypothesis is if countries with a GDP within a higher range develop policies that cluster around a certain energy type, and vice versa for countries within a lower GDP range.</p>
+<h2 id="messed-a-few-things-up-so-save-but-dont-knit-or-push-before-fixing">MESSED A FEW THINGS UP SO SAVE BUT DON’T KNIT OR PUSH BEFORE FIXING</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='va'>countries_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"region-g20+countries.csv"</span><span class='op'>)</span></span>
-<span><span class='va'>countries_data</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 1,126 × 20
-   Country   Jurisdiction `Policy Category`    `Name of policy` Sector
-   &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;                &lt;chr&gt;            &lt;chr&gt; 
- 1 Argentina national     clean unconditional  Green productiv… Power…
- 2 Argentina &lt;NA&gt;         clean conditional    Green productiv… Mobil…
- 3 Argentina national     clean unconditional  Green productiv… Power…
- 4 Russia    National     fossil unconditional Reduction Coeff… Resou…
- 5 Japan     National     clean unconditional  Subsidy for the… Power…
- 6 Japan     National     clean conditional    Project to prom… Mobil…
- 7 Japan     National     clean unconditional  Project to supp… Power…
- 8 Japan     National     clean unconditional  Subsidy for pro… Power…
- 9 Japan     National     clean unconditional  Promotion of Se… Build…
-10 Japan     National     clean unconditional  Introduction an… Power…
-# ℹ 1,116 more rows
-# ℹ 15 more variables: `Energy Type` &lt;chr&gt;, Stage &lt;chr&gt;,
-#   Mechanism &lt;chr&gt;, `Legislation and Endorsing Agency` &lt;chr&gt;,
-#   Objectives &lt;chr&gt;, `Date of announcement` &lt;chr&gt;,
-#   `Date of entry info force` &lt;chr&gt;, Currency &lt;chr&gt;,
-#   `Value committed` &lt;dbl&gt;, `Value committed, USD` &lt;dbl&gt;,
-#   `Value disbursed` &lt;dbl&gt;, `Value disbursed, USD` &lt;dbl&gt;, …</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>countries_data</span> <span class='op'>&lt;-</span> <span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='st'>"Country"</span>, <span class='st'>"Policy Category"</span>, <span class='st'>"Energy Type"</span>, <span class='st'>"Value committed, USD"</span><span class='op'>)</span></span>
-<span><span class='va'>countries_data</span></span></code></pre>
-</div>
-<pre><code># A tibble: 1,126 × 4
-   Country   `Policy Category`    `Energy Type` `Value committed, USD`
-   &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;                          &lt;dbl&gt;
- 1 Argentina clean unconditional  multiple ren…               17720694
- 2 Argentina clean conditional    multiple ene…               42529665
- 3 Argentina clean unconditional  solar                        1630304
- 4 Russia    fossil unconditional gas and gas …                      0
- 5 Japan     clean unconditional  multiple ren…                3744547
- 6 Japan     clean conditional    multiple ene…                9365489
- 7 Japan     clean unconditional  multiple ren…               15453056
- 8 Japan     clean unconditional  multiple ren…               27596226
- 9 Japan     clean unconditional  multiple ren…               65558418
-10 Japan     clean unconditional  multiple ren…              121749595
-# ℹ 1,116 more rows</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>countries_data</span> <span class='op'>&lt;-</span> <span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>countries_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"region-g20+countries.csv"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='st'>"Country"</span>, <span class='st'>"Policy Category"</span>, <span class='st'>"Energy Type"</span>, <span class='st'>"Value committed, USD"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span></span>
 <span>    country <span class='op'>=</span> <span class='st'>"Country"</span>,</span>
 <span>    policy_category <span class='op'>=</span> <span class='st'>"Policy Category"</span>,</span>
 <span>    energy_type <span class='op'>=</span> <span class='st'>"Energy Type"</span>,</span>
 <span>    value_committed_usd <span class='op'>=</span> <span class='st'>"Value committed, USD"</span></span>
-<span>  <span class='op'>)</span></span></code></pre>
+<span>  <span class='op'>)</span></span>
+<span><span class='va'>countries_data</span></span></code></pre>
 </div>
+<pre><code># A tibble: 1,126 × 4
+   country   policy_category      energy_type      value_committed_usd
+   &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;                          &lt;dbl&gt;
+ 1 Argentina clean unconditional  multiple renewa…            17720694
+ 2 Argentina clean conditional    multiple energy…            42529665
+ 3 Argentina clean unconditional  solar                        1630304
+ 4 Russia    fossil unconditional gas and gas pro…                   0
+ 5 Japan     clean unconditional  multiple renewa…             3744547
+ 6 Japan     clean conditional    multiple energy…             9365489
+ 7 Japan     clean unconditional  multiple renewa…            15453056
+ 8 Japan     clean unconditional  multiple renewa…            27596226
+ 9 Japan     clean unconditional  multiple renewa…            65558418
+10 Japan     clean unconditional  multiple renewa…           121749595
+# ℹ 1,116 more rows</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>country</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span></span>
+<span>    energy_type <span class='op'>=</span> <span class='va'>energy_type</span>,</span>
+<span>    mean_value <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>value_committed_usd</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>energy_type</span>,</span>
+<span>                       y <span class='op'>=</span> <span class='va'>mean_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>country</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>guide <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_axis.html'>guide_axis</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>90</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>##Practice</p>
+<p>I’m on track to something, I might need to</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>country</span>, <span class='va'>energy_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span></span>
+<span>    energy_type <span class='op'>=</span> <span class='va'>energy_type</span>,</span>
+<span>    mean_value <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>value_committed_usd</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1,126 × 3
+# Groups:   country, energy_type [190]
+   country   energy_type           mean_value
+   &lt;chr&gt;     &lt;chr&gt;                      &lt;dbl&gt;
+ 1 Argentina coal                          0 
+ 2 Argentina gas and gas products  677961546.
+ 3 Argentina gas and gas products  677961546.
+ 4 Argentina multiple energy types  31188421 
+ 5 Argentina multiple energy types  31188421 
+ 6 Argentina multiple renewable     17720694 
+ 7 Argentina oil and oil products          0 
+ 8 Argentina oil and oil products          0 
+ 9 Argentina oil and oil products          0 
+10 Argentina oil and oil products          0 
+# ℹ 1,116 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>country</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>energy_type</span>, y <span class='op'>=</span> <span class='va'>value_committed_usd</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>      <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>country</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>guide <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_axis.html'>guide_axis</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>90</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fossil_countries</span> <span class='op'>&lt;-</span> <span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>policy_category</span> <span class='op'>==</span> <span class='st'>"fossil unconditional"</span>,</span>
+<span>    <span class='va'>value_committed_usd</span> <span class='op'>&gt;</span> <span class='fl'>0</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>country</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span></span>
+<span>    total_fossil <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>value_committed_usd</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>total_fossil</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>fossil_countries</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Country"</span>, <span class='st'>"Total Value Committed to Fossil Fuel Policies"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Total Value Committed to Fossil Fuel Policies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">United States</td>
+<td style="text-align: right;">140873566668</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">United Kingdom</td>
+<td style="text-align: right;">40210256414</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">India</td>
+<td style="text-align: right;">37885523252</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Canada</td>
+<td style="text-align: right;">30360051068</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">25341799339</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">18915525116</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Turkey</td>
+<td style="text-align: right;">15772080664</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: right;">8659685379</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Russia</td>
+<td style="text-align: right;">8320865406</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">7591324202</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Indonesia</td>
+<td style="text-align: right;">6537420994</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Saudi Arabia</td>
+<td style="text-align: right;">5590004003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Republic of Korea</td>
+<td style="text-align: right;">4998830783</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">3972602741</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: right;">1692422579</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">1629594943</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">1355923091</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: right;">637406666</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">581959263</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>clean_countries</span> <span class='op'>&lt;-</span> <span class='va'>countries_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>policy_category</span> <span class='op'>==</span> <span class='st'>"clean unconditional"</span>,</span>
+<span>    <span class='va'>value_committed_usd</span> <span class='op'>&gt;</span> <span class='fl'>0</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>country</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span></span>
+<span>    total_clean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>value_committed_usd</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>total_clean</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>clean_countries</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Country"</span>, <span class='st'>"Total Value Committed to Clean Fuel Policies"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Total Value Committed to Clean Fuel Policies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">United Kingdom</td>
+<td style="text-align: right;">20780512837</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">United States</td>
+<td style="text-align: right;">16119300000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">13307420102</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">12621575344</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">11712328769</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">India</td>
+<td style="text-align: right;">8916518458</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Canada</td>
+<td style="text-align: right;">6439599290</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: right;">3285061954</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1265323864</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: right;">934736108</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">923472361</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">916320107</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Saudi Arabia</td>
+<td style="text-align: right;">906666667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Republic of Korea</td>
+<td style="text-align: right;">345427681</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">19847178</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

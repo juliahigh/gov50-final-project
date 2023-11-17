@@ -18,8 +18,6 @@ Hypothesis: I predict that as a country's GDP** increases, they will focus their
 
 The explanatory variable of interest in my project will be countries' GDP. I intend to add a column to my dataset with information on the GDP of each of the G20 countries to perform my analysis. I will then create a range of values for each GDP level and categorize countries by their GDP range of "High GDP", "Medium GDP," or "Low GDP." These values will all be relative given that this dataset includes G20 countries. My outcome variable of interest is the type of energy source that a given governmental policy focuses on. In this dataset, the energy types include oil and gas, gas and gas products, nuclear, multiple fossil, wind, multiple renewable, solar, coal, hydrogen, biofuels and waste, and hydro. There are some miscellaneous types that do not focus on a specific type of energy, so I will remove those from my analysis. An observed pattern in the data that would provide support for my hypothesis is if countries with a GDP within a higher range develop policies that cluster around a certain energy type, and vice versa for countries within a lower GDP range. 
 
-## MESSED A FEW THINGS UP SO SAVE BUT DON'T KNIT OR PUSH BEFORE FIXING
-
 
 ```{r}
 library(tidyverse)
